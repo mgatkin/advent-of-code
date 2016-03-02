@@ -2,7 +2,7 @@
 
 import fileinput
 
-def wrapping_paper(s):
+def area_required(s):
     try:
         l, w, h = map(int, s.split('x'))
         a = [ l*w, l*h, w*h ]
@@ -13,7 +13,7 @@ def wrapping_paper(s):
 if __name__ == '__main__':
     area = 0
     for line in fileinput.input():
-        present = wrapping_paper(line)
+        present = area_required(line)
         if present is not None:
             area += present
     print 'Wrapping paper required: %i' % area
