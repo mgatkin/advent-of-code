@@ -25,4 +25,6 @@ def next_house(coords, direction):
     return x, y
 
 if __name__ == '__main__':
-    pass
+    for line in fileinput.input():
+        print 'Delivered to %i houses' % count_presents(line)
+
