@@ -14,7 +14,8 @@ def mine_advent_coin(s):
 
 if __name__ == '__main__':
     for line in fileinput.input():
-        number = str(mine_advent_coin(line.strip()))
-        hash_of_number = advent_hash(line.strip() + number)
-        print 'MD5 hash of ' + line.strip() + number + ' starts with ' + hash_of_number[:11] + '...'
+        secret_key = line.strip()
+        number = str(mine_advent_coin(secret_key))
+        hash_of_number = advent_hash(secret_key + number)
+        print 'MD5 hash of ' + secret_key + number + ' starts with ' + hash_of_number[:11] + '...'
 
