@@ -23,4 +23,3 @@ if __name__ == '__main__':
             print 'MD5 hash of ' + key + number + ' starts with ' + \
                 hash_result[:(zeroes + 6)] + \
                 '... (Ran in %.3f seconds)' % (time() - start_time)
-
