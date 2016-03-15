@@ -2,15 +2,15 @@
 
 import unittest
 
-from day05 import nicestring
+from nicestring import set_of_rules_1
 
 class TestFunction(unittest.TestCase):
     def test_nicestring(self):
-        self.assertEqual(nicestring('ugknbfddgicrmopn'), 'nice')
-        self.assertEqual(nicestring('aaa'), 'nice')
-        self.assertEqual(nicestring('jchzalrnumimnmhp'), 'naughty')
-        self.assertEqual(nicestring('haegwjzuvuyypxyu'), 'naughty')
-        self.assertEqual(nicestring('dvszwmarrgswjxmb'), 'naughty')
+        self.assertEqual(set_of_rules_1('ugknbfddgicrmopn'), 'nice')
+        self.assertEqual(set_of_rules_1('aaa'), 'nice')
+        self.assertEqual(set_of_rules_1('jchzalrnumimnmhp'), 'naughty')
+        self.assertEqual(set_of_rules_1('haegwjzuvuyypxyu'), 'naughty')
+        self.assertEqual(set_of_rules_1('dvszwmarrgswjxmb'), 'naughty')
 
 
 if __name__ == '__main__':
