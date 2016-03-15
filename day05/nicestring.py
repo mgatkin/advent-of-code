@@ -2,6 +2,8 @@
 
 import fileinput
 import re
+import sys
+from os.path import basename
 
 def set_of_rules_1(s):
     re1 = re.compile(r'.*[aeiou].*[aeiou].*[aeiou]')
@@ -23,6 +25,10 @@ def set_of_rules_2(s):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print 'Usage:', basename(__file__), '<input file>'
+        sys.exit(0)
+
     nice_lines = [ ]
     rules = [ set_of_rules_1, set_of_rules_2 ]
     for index, rule in enumerate(rules):
