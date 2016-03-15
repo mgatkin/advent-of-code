@@ -13,12 +13,22 @@ def set_of_rules_1(s):
         return 'naughty'
 
 
+def set_of_rules_2(s):
+    re1 = re.compile(r'.*([a-z][a-z]).*\1')
+    re2 = re.compile(r'.*([a-z]).\1')
+    if re1.match(s) is not None and re2.match(s) is not None:
+        return 'nice'
+    else:
+        return 'naughty'
+
+
 if __name__ == '__main__':
-    nice_lines = [ 0 ]
-    rules = [ set_of_rules_1 ]
+    nice_lines = [ ]
+    rules = [ set_of_rules_1, set_of_rules_2 ]
     for index, rule in enumerate(rules):
+        nice_lines.append(0)
         for line in fileinput.input():
             if rule(line) == 'nice':
                 nice_lines[index] += 1
-        print 'Rule set', index, 'found', nice_lines[index], 'nice line(s) in', fileinput.filename()
+        print 'Rule set', index + 1, 'found', nice_lines[index], 'nice line(s) in', fileinput.filename()
 
