@@ -5,23 +5,19 @@ import re
 import sys
 from os.path import basename
 
-def set_of_rules_1(s):
-    re1 = re.compile(r'.*[aeiou].*[aeiou].*[aeiou]')
-    re2 = re.compile(r'.*([a-z])\1')
-    re3 = re.compile(r'.*((ab)|(cd)|(pq)|(xy))')
-    if re1.match(s) is not None and re2.match(s) is not None and re3.match(s) is None:
-        return 'nice'
-    else:
-        return 'naughty'
+def process_rule(rule, s):
+    for exp in rule:
+        rexp = re.compile(exp)
+        if rexp.match(s) is None:
+            return 'naughty'
+    return 'nice'
+
+def rule_set_1(s):
+    return process_rule([ r'(.*[aeiou]){3}', r'.*([a-z])\1', r'(?!.*((ab)|(cd)|(pq)|(xy)))' ], s)
 
 
-def set_of_rules_2(s):
-    re1 = re.compile(r'.*([a-z][a-z]).*\1')
-    re2 = re.compile(r'.*([a-z]).\1')
-    if re1.match(s) is not None and re2.match(s) is not None:
-        return 'nice'
-    else:
-        return 'naughty'
+def rule_set_2(s):
+    return process_rule([ r'.*([a-z]{2}).*\1', r'.*([a-z]).\1' ], s)
 
 
 if __name__ == '__main__':
@@ -30,7 +26,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     nice_lines = [ ]
-    rules = [ set_of_rules_1, set_of_rules_2 ]
+    rules = [ rule_set_1, rule_set_2 ]
     for index, rule in enumerate(rules):
         nice_lines.append(0)
         for line in fileinput.input():
