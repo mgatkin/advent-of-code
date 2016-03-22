@@ -5,19 +5,18 @@ import re
 import sys
 from os.path import basename
 
-def process_rule(rule, s):
+def process_rule_set(rule, s):
     for exp in rule:
-        rexp = re.compile(exp)
-        if rexp.match(s) is None:
+        if re.match(exp, s) is None:
             return 'naughty'
     return 'nice'
 
 def rule_set_1(s):
-    return process_rule([ r'(.*[aeiou]){3}', r'.*([a-z])\1', r'(?!.*((ab)|(cd)|(pq)|(xy)))' ], s)
+    return process_rule_set([ r'(.*[aeiou]){3}', r'.*([a-z])\1', r'(?!.*((ab)|(cd)|(pq)|(xy)))' ], s)
 
 
 def rule_set_2(s):
-    return process_rule([ r'.*([a-z]{2}).*\1', r'.*([a-z]).\1' ], s)
+    return process_rule_set([ r'.*([a-z]{2}).*\1', r'.*([a-z]).\1' ], s)
 
 
 if __name__ == '__main__':
