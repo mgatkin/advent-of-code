@@ -30,6 +30,15 @@ def turn_on(arr, m):
 def turn_off(arr, m):
     return set_light(arr, m, lambda x: 0)
 
+def adjustable_toggle(arr, m):
+    return set_light(arr, m, lambda x: x + 2)
+
+def adjustable_turn_on(arr, m):
+    return set_light(arr, m, lambda x: x + 1)
+
+def adjustable_turn_off(arr, m):
+    return set_light(arr, m, lambda x: x - 1 if x > 0 else 0)
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print 'Usage:', basename(__file__), '<input file>'
@@ -37,17 +46,27 @@ if __name__ == '__main__':
 
     line_no = 0
     lights = [[0 for x in xrange(1000)] for x in xrange(1000)] 
+    adjustable_lights = [[0 for x in xrange(1000)] for x in xrange(1000)] 
     for line in fileinput.input():
         line_no = line_no + 1
         instruction, m = parse_instruction(line)
         if instruction == 'toggle':
             toggle(lights, m)
+            adjustable_toggle(adjustable_lights, m)
         if instruction == 'turn on':
             turn_on(lights, m)
+            adjustable_turn_on(adjustable_lights, m)
         if instruction == 'turn off':
             turn_off(lights, m)
+            adjustable_turn_off(adjustable_lights, m)
+
     count = 0
     for row, data in enumerate(lights):
         count = count + sum(data)
     print count, 'light(s) on'
+
+    brightness = 0
+    for row, data in enumerate(adjustable_lights):
+        brightness = brightness + sum(data)
+    print 'Total brighntess is', brightness
 
