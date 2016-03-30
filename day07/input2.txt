@@ -1,0 +1,9 @@
+1 -> a
+2 -> b
+4 -> c
+8 -> d
+a OR b -> e
+4 AND c -> f
+b LSHIFT 1 -> g
+b RSHIFT 1 -> h
+NOT h -> i
