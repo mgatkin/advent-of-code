@@ -11,7 +11,8 @@ class Wire(object):
         self._input2 = None
 
     def __str__(self):
-        return 'output = %s\ncmd = %s\ninput1 = %s\ninput2 = %s' % (self._output, self._cmd, self._input1, self._input2)
+        return 'output = %s\ncmd = %s\ninput1 = %s\ninput2 = %s' % \
+            (self._output, self._cmd, self._input1, self._input2)
 
     @property
     def output(self):
