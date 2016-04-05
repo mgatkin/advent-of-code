@@ -109,9 +109,10 @@ def function(s):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Decipher logic for Advent-Of-Code:  Day 7')
     parser.add_argument('infile', type=argparse.FileType('r'))
-    parser.add_argument('wire', nargs='?')
+    parser.add_argument('wire', nargs='?', default='a')
     p = parser.parse_args()
 
+    # Parse input file into dictionary
     data = p.infile.readlines()
     d = OrderedDict()
     for line in data:
@@ -119,16 +120,17 @@ if __name__ == '__main__':
         if id:
             w = Wire(id, cmd, in1, in2)
             d[id] = w
-    if p.wire is None:
-        for wire in d.itervalues():
-            print wire.output + ':', evaluate(d, wire)
+
+    # Evaluate nodes in dictionary
+    # HACK: Skip first item to speed up processing.  Won't work for all types of input files.
+    for wire in xrange(1, len(d)):
+        wire_name = ('' if wire < 26 else chr(ord('a') + wire / 26 - 1)) + chr(ord('a') + (wire % 26))
+        d[wire_name] = Wire(wire_name, input1=evaluate(d, d[wire_name]))
+        print wire_name + ':', evaluate(d, d[wire_name])
+
+    # Output results
+    if p.wire in d:
+        print p.wire + ':', evaluate(d, d[p.wire])
     else:
-        if p.wire is 'a':
-            for wire in xrange(1, len(d)):
-                wire_name = ('' if wire < 26 else chr(ord('a') + wire / 26 - 1)) + chr(ord('a') + (wire % 26))
-                d[wire_name] = Wire(wire_name, input1=evaluate(d, d[wire_name]))
-                print wire_name + ':', d[wire_name].input1
-            print 'a:', evaluate(d, d['a'])
-        else:
-            print p.wire + ':', evaluate(d, d[p.wire])
+        print p.wire, 'not found in input file.'
 
