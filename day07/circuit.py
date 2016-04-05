@@ -3,12 +3,12 @@
 import fileinput
 import re
 
-class Wire(object):
-    def __init(self):
-        self._output = None
-        self._cmd = None
-        self._input1 = None
-        self._input2 = None
+class Wire:
+    def __init__(self, output=None, cmd=None, input1=None, input2=None):
+        self._output = output
+        self._cmd = cmd
+        self._input1 = TryInt(input1)
+        self._input2 = TryInt(input2)
 
     def __str__(self):
         return 'output = %s\ncmd = %s\ninput1 = %s\ninput2 = %s' % \
@@ -40,11 +40,11 @@ class Wire(object):
 
     @input1.setter
     def input1(self, value):
-        self._input1 = value
+        self._input1 = TryInt(value)
 
     @input2.setter
     def input2(self, value):
-        self._input2 = value
+        self._input2 = TryInt(value)
 
     @output.deleter
     def output(self):
@@ -62,23 +62,21 @@ class Wire(object):
     def input2(self):
         del self._input2
     
-def evaluate(value):
-    if type(value) is int:
-        return value
-    else:
-        if value.cmd == 'NOT':
-            return ~evaluate(value.input1) & 0xffff
-        if value.cmd == 'AND':
-            return value.input1 & value.input2
-        if value.cmd == 'OR':
-            return value.input1 | value.input2
-        if value.cmd == 'LSHIFT':
-            return (value.input1 << value.input2) & 0xffff
-        if value.cmd == 'RSHIFT':
-            return (value.input1 >> value.input2) & 0xffff
-        if not value.cmd:
-            return evaluate(value.input1)
-    return None
+    def evaluate(self, value):
+        if type(value) is wire:
+            return evaluate(value)
+        if self._cmd == 'NOT':
+            return ~(self._input1) & 0xffff
+        if self._cmd == 'AND':
+            return self._input1 & self._input2
+        if self._cmd == 'OR':
+            return self._input1 | self._input2
+        if self._cmd == 'LSHIFT':
+            return (self._input1 << self._input2) & 0xffff
+        if self._cmd == 'RSHIFT':
+            return (self._input1 >> self._input2) & 0xffff
+        if not self._cmd:
+            return self._input1
     
 def parse_input(s):
     count = len(s.split())
@@ -92,10 +90,10 @@ def parse_input(s):
 
     return output, cmd, input1, input2
 
-def value(v):
+def TryInt(v):
     try:
         return int(v)
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, AttributeError):
         return v
 
 def function(s):
@@ -106,15 +104,11 @@ if __name__ == '__main__':
     for line in fileinput.input():
         id, cmd, in1, in2 = parse_input(line.strip())
         if id:
-            w = Wire()
-            w.output = id
-            w.cmd = cmd
-            w.input1 = evaluate(value(in1))
-            if in2:
-                w.input2 = evaluate(value(in2))
+            w = Wire(id, cmd, in1, in2)
             d[id] = w
+    print d
     for wire in d.itervalues():
-        print wire.output, '=', evaluate(wire)
+        print wire.output, '=', wire.evaluate()
 '''
 w = Wire()
 w.output = 'a'
