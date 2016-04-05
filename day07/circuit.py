@@ -2,7 +2,7 @@
 
 import sys
 from os.path import basename
-import fileinput
+import argparse
 import re
 from collections import OrderedDict
 
@@ -107,16 +107,21 @@ def function(s):
     return s
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print 'Usage:', basename(__file__), '<input file>'
-        sys.exit(0)
+    parser = argparse.ArgumentParser(description='Decipher logic for Advent-Of-Code:  Day 7')
+    parser.add_argument('infile', type=argparse.FileType('r'))
+    parser.add_argument('wire', nargs='?')
+    p = parser.parse_args()
 
+    data = p.infile.readlines()
     d = dict()#OrderedDict()
-    for line in fileinput.input():
+    for line in data:
         id, cmd, in1, in2 = parse_input(line.strip())
         if id:
             w = Wire(id, cmd, in1, in2)
             d[id] = w
-    for wire in d.itervalues():
-        print wire.output, '=', evaluate(d, wire)
+    if p.wire is None:
+        for wire in d.itervalues():
+            print wire.output, '=', evaluate(d, wire)
+    else:
+        print 'wire', p.wire, 'is', evaluate(d, d[p.wire])
 
