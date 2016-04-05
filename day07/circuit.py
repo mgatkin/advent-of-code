@@ -4,6 +4,7 @@ import sys
 from os.path import basename
 import fileinput
 import re
+from collections import OrderedDict
 
 class Wire:
     def __init__(self, output=None, cmd=None, input1=None, input2=None):
@@ -13,7 +14,7 @@ class Wire:
         self._input2 = TryInt(input2)
 
     def __str__(self):
-        return 'output = %s\ncmd = %s\ninput1 = %s\ninput2 = %s' % \
+        return 'output = %-4s <===> cmd = %-6s <===> input1 = %-4s <===> input2 = %-4s' % \
             (self._output, self._cmd, self._input1, self._input2)
 
     @property
@@ -64,21 +65,25 @@ class Wire:
     def input2(self):
         del self._input2
     
-def evaluate(value):
+def evaluate(d=dict(), value=None):
     if type(value) is Wire:
-        return evaluate(value)
+        return evaluate(d, value)
+    if type(value) is str:
+        return evaluate(d, d[value])
+    if type(value) is int:
+        return value
     if value.cmd == 'NOT':
-        return ~(value.input1) & 0xffff
+        return ~(evaluate(d, value.input1)) & 0xffff
     if value.cmd == 'AND':
-        return value.input1 & value.input2
+        return evaluate(d, value.input1) & evaluate(d, value.input2)
     if value.cmd == 'OR':
-        return value.input1 | value.input2
+        return evaluate(d, value.input1) | evaluate(d, value.input2)
     if value.cmd == 'LSHIFT':
-        return (value.input1 << value.input2) & 0xffff
+        return (evaluate(d, value.input1) << evaluate(d, value.input2)) & 0xffff
     if value.cmd == 'RSHIFT':
-        return (value.input1 >> value.input2) & 0xffff
+        return (evaluate(d, value.input1) >> evaluate(d, value.input2)) & 0xffff
     if not value.cmd:
-        return value.input1
+        return evaluate(d, value.input1)
     
 def parse_input(s):
     count = len(s.split())
@@ -106,12 +111,12 @@ if __name__ == '__main__':
         print 'Usage:', basename(__file__), '<input file>'
         sys.exit(0)
 
-    d = dict()
+    d = dict()#OrderedDict()
     for line in fileinput.input():
         id, cmd, in1, in2 = parse_input(line.strip())
         if id:
             w = Wire(id, cmd, in1, in2)
             d[id] = w
     for wire in d.itervalues():
-        print wire.output, '=', evaluate(wire)
+        print wire.output, '=', evaluate(d, wire)
 
