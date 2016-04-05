@@ -111,6 +111,7 @@ if __name__ == '__main__':
     parser.add_argument('infile', type=argparse.FileType('r'))
     parser.add_argument('wire', nargs='?', default='a')
     parser.add_argument('--override', nargs=2)
+    parser.add_argument('--unsorted', action='store_true')
     p = parser.parse_args()
 
     # Parse input file into dictionary
@@ -126,15 +127,17 @@ if __name__ == '__main__':
         d[p.override[0]] = Wire(p.override[0], input1=p.override[1])
 
     # Evaluate nodes in dictionary
-    # HACK: Skip first item to speed up processing.  Won't work for all types of input files.
-    for wire in xrange(1, len(d)):
-        wire_name = ('' if wire < 26 else chr(ord('a') + wire / 26 - 1)) + chr(ord('a') + (wire % 26))
-        d[wire_name] = Wire(wire_name, input1=evaluate(d, d[wire_name]))
-        print wire_name + ':', evaluate(d, d[wire_name])
-
-    # Output results
-    if p.wire in d:
-        print p.wire + ':', evaluate(d, d[p.wire])
+    if p.unsorted:
+        for wire in d.itervalues():
+            print wire.output + ':', evaluate(d, wire)
     else:
-        print p.wire, 'not found in input file.'
+        # Skip first item to speed up processing.  May not work for all types of input files.
+        for wire in xrange(1, len(d)):
+            wire_name = ('' if wire < 26 else chr(ord('a') + wire / 26 - 1)) + chr(ord('a') + (wire % 26))
+            d[wire_name] = Wire(wire_name, input1=evaluate(d, d[wire_name]))
+            print wire_name + ':', evaluate(d, d[wire_name])
+        if p.wire in d:
+            print p.wire + ':', evaluate(d, d[p.wire])
+        else:
+            print p.wire, 'not found in input file.'
 
