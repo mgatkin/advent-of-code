@@ -129,6 +129,7 @@ if __name__ == '__main__':
     # Evaluate nodes in dictionary
     if p.unsorted:
         for wire in d.itervalues():
+            d[wire.output] = Wire(wire.output, input1=evaluate(d, d[wire.output]))
             print wire.output + ':', evaluate(d, wire)
     else:
         # Skip first item to speed up processing.  May not work for all types of input files.
