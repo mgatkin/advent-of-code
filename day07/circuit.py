@@ -113,7 +113,7 @@ if __name__ == '__main__':
     p = parser.parse_args()
 
     data = p.infile.readlines()
-    d = dict()#OrderedDict()
+    d = OrderedDict()
     for line in data:
         id, cmd, in1, in2 = parse_input(line.strip())
         if id:
@@ -121,7 +121,14 @@ if __name__ == '__main__':
             d[id] = w
     if p.wire is None:
         for wire in d.itervalues():
-            print wire.output, '=', evaluate(d, wire)
+            print wire.output + ':', evaluate(d, wire)
     else:
-        print 'wire', p.wire, 'is', evaluate(d, d[p.wire])
+        if p.wire is 'a':
+            for wire in xrange(1, len(d)):
+                wire_name = ('' if wire < 26 else chr(ord('a') + wire / 26 - 1)) + chr(ord('a') + (wire % 26))
+                d[wire_name] = Wire(wire_name, input1=evaluate(d, d[wire_name]))
+                print wire_name + ':', d[wire_name].input1
+            print 'a:', evaluate(d, d['a'])
+        else:
+            print p.wire + ':', evaluate(d, d[p.wire])
 
