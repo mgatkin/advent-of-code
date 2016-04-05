@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import sys
+from os.path import basename
 import fileinput
 import re
 
@@ -100,6 +102,10 @@ def function(s):
     return s
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print 'Usage:', basename(__file__), '<input file>'
+        sys.exit(0)
+
     d = dict()
     for line in fileinput.input():
         id, cmd, in1, in2 = parse_input(line.strip())
