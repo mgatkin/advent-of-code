@@ -110,6 +110,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Decipher logic for Advent-Of-Code:  Day 7')
     parser.add_argument('infile', type=argparse.FileType('r'))
     parser.add_argument('wire', nargs='?', default='a')
+    parser.add_argument('--override', nargs=2)
     p = parser.parse_args()
 
     # Parse input file into dictionary
@@ -120,6 +121,9 @@ if __name__ == '__main__':
         if id:
             w = Wire(id, cmd, in1, in2)
             d[id] = w
+
+    if p.override:
+        d[p.override[0]] = Wire(p.override[0], input1=p.override[1])
 
     # Evaluate nodes in dictionary
     # HACK: Skip first item to speed up processing.  Won't work for all types of input files.
