@@ -106,13 +106,6 @@ if __name__ == '__main__':
         if id:
             w = Wire(id, cmd, in1, in2)
             d[id] = w
-    print d
     for wire in d.itervalues():
         print wire.output, '=', evaluate(wire)
-'''
-w = Wire()
-w.output = 'a'
-w.cmd = 'NOT'
-w.input1 = 255
-print evaluate(w)
-'''
+
