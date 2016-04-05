@@ -62,21 +62,21 @@ class Wire:
     def input2(self):
         del self._input2
     
-    def evaluate(self, value):
-        if type(value) is wire:
-            return evaluate(value)
-        if self._cmd == 'NOT':
-            return ~(self._input1) & 0xffff
-        if self._cmd == 'AND':
-            return self._input1 & self._input2
-        if self._cmd == 'OR':
-            return self._input1 | self._input2
-        if self._cmd == 'LSHIFT':
-            return (self._input1 << self._input2) & 0xffff
-        if self._cmd == 'RSHIFT':
-            return (self._input1 >> self._input2) & 0xffff
-        if not self._cmd:
-            return self._input1
+def evaluate(value):
+    if type(value) is Wire:
+        return evaluate(value)
+    if value.cmd == 'NOT':
+        return ~(value.input1) & 0xffff
+    if value.cmd == 'AND':
+        return value.input1 & value.input2
+    if value.cmd == 'OR':
+        return value.input1 | value.input2
+    if value.cmd == 'LSHIFT':
+        return (value.input1 << value.input2) & 0xffff
+    if value.cmd == 'RSHIFT':
+        return (value.input1 >> value.input2) & 0xffff
+    if not value.cmd:
+        return value.input1
     
 def parse_input(s):
     count = len(s.split())
@@ -108,7 +108,7 @@ if __name__ == '__main__':
             d[id] = w
     print d
     for wire in d.itervalues():
-        print wire.output, '=', wire.evaluate()
+        print wire.output, '=', evaluate(wire)
 '''
 w = Wire()
 w.output = 'a'
