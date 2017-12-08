@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from __future__ import with_statement
 
-with open('day01.txt') as f:
+with open('input.txt') as f:
     data = f.readlines()
 
 for puzzle_number, line in enumerate(data):
