@@ -6,12 +6,6 @@ def linediff(d):
     data = map(int, d.strip().split('\t'))
     return max(data) - min(data)
 
-def checksum(d, f):
-    total = 0
-    for data in d.strip().split('\n'):
-        total += f(data)
-    return total
-
 def linediv(d): 
     data = map(int, d.strip().split('\t'))
     for n in data:
@@ -22,6 +16,12 @@ def linediv(d):
                 return n / s
     return 0
     
+def checksum(d, f):
+    total = 0
+    for data in d.strip().split('\n'):
+        total += f(data)
+    return total
+
 if __name__ == '__main__':
     linediffs = []
     lines = []
