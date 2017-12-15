@@ -2,13 +2,16 @@
 
 import fileinput
 
-def function1(d): 
-    return int(d)
-    
+def linediff(d):
+    data = map(int, d.strip().split('\t'))
+    return max(data) - min(data)
+
 def function2(d): 
     return int(d)
     
 if __name__ == '__main__':
+    linediffs = []
     for n, line in enumerate(fileinput.input()):
-        print 'Executing function1 on line', (n + 1), 'returned ', function1(line)
-        print 'Executing function2 on line', (n + 1), 'returned ', function2(line)
+        linediffs.append(linediff(line))
+        print 'linediff of line', n, 'is', linediffs[n]
+    print 'checksum is', sum(linediffs)
