@@ -21,8 +21,5 @@ class TestDay03(unittest.TestCase):
         self.assertEqual(distance(9), 2)
         self.assertEqual(distance(10), 3)
 
-#    def test_part_two(self):
-#        self.assertEqual(function2('0'), 0)
-
 if __name__ == '__main__':
     unittest.main()
