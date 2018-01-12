@@ -15,5 +15,11 @@ class TestDay12(unittest.TestCase):
         self.assertEqual(traverse([]), 0)
         self.assertEqual(traverse({}), 0)
 
+    def test_part_two(self):
+        self.assertEqual(traverse([1,2,3], "red"), 6)
+        self.assertEqual(traverse([1,{"c":"red","b":2},3], "red"), 4)
+        self.assertEqual(traverse({"d":"red","e":[1,2,3,4],"f":5}, "red"), 0)
+        self.assertEqual(traverse([1,"red",5], "red"), 6)
+
 if __name__ == '__main__':
     unittest.main()
