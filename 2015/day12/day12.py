@@ -3,13 +3,21 @@
 import json
 import fileinput
 
-def function1(d): 
-    print d
-    j = json.loads(d)
-    return type(j)
-#    if type(j) == list:
-#        return sum(j)
+def traverse(d):
+    total = 0
+    if type(d) is dict:
+        values = [ v for v in d.values() ]
+        total = total + traverse(values)
+    elif type(d) is list:
+        for i in d:
+            total = total + traverse(i)
+    else:
+        try:
+            total = total + int(d)
+        except ValueError:
+            pass
+    return total
 
 if __name__ == '__main__':
     for n, line in enumerate(fileinput.input()):
-        print 'Executing function1 on line', (n + 1), 'returned', function1(line.strip())
+        print 'Executing traverse on line', str(n + 1), 'returned', traverse(json.loads(line))
