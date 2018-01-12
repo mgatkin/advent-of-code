@@ -7,7 +7,8 @@ def traverse(d):
     total = 0
     if type(d) is dict:
         values = [ v for v in d.values() ]
-        total = total + traverse(values)
+        if "red" not in values:
+            total = total + traverse(values)
     elif type(d) is list:
         for i in d:
             total = total + traverse(i)
