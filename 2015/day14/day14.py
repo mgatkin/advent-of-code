@@ -7,7 +7,12 @@ import fileinput
 def add_reindeer(d, l):
     if len(l.split()) != 15:
         return
-    (name, speed, duration, rest) = [ l.split()[0], int(l.split()[3]), int(l.split()[6]), int(l.split()[13]) ] 
+    (name, speed, duration, rest) = [
+            l.split()[0],
+            int(l.split()[3]),
+            int(l.split()[6]),
+            int(l.split()[13])
+            ] 
     d[name] = (speed, duration, rest)
 
 def race(d, time):
@@ -30,8 +35,12 @@ def race(d, time):
         for n, v in enumerate(distance_traveled):
             if v == max(distance_traveled):
                 score[n] = score[n] + 1
-    print time, 'second race distance winner:', data.keys()[distance_traveled.index(max(distance_traveled))], max(distance_traveled), 'km'
-    print time, 'second race score winner:', data.keys()[score.index(max(score))], max(score), 'points'
+    print time, 'second race distance winner:',
+    print data.keys()[distance_traveled.index(max(distance_traveled))],
+    print max(distance_traveled), 'km'
+    print time, 'second race score winner:',
+    print data.keys()[score.index(max(score))],
+    print max(score), 'points'
 
 if __name__ == '__main__':
     data = {} 
