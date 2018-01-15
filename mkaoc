@@ -1,17 +1,33 @@
 #!/bin/bash
-if [ ! -d $1 ]; then
-    echo Directory $1 does not exist
+if [[ "$1" =~ ^2[0-9]{3}$ ]]; then
+    year=$1
+elif [[ "$1" =~ ^[0-9]{2}$ ]]; then
+    year=20$1
+fi
+if [[ "$2" =~ ^[0-3][0-9]$ ]]; then
+    day=$2
+elif [[ "$2" =~ ^[1-9]$ ]]; then
+    day=0$2
+fi
+
+if [[ $# -ne 2 || -z "$year" || -z "$day" ]]; then
+    echo "Syntax: `basename "$0"` <yyyy> <dd>"
+    exit 0
+fi
+
+if [ ! -d $year ]; then
+    echo Directory $year does not exist
     exit 1
 fi
 
-if [ -d $1/day$2 ]; then
-    echo Directory $1/day$2 already exists
+if [ -d $year/day$day ]; then
+    echo Directory $year/day$day already exists
     exit 1
 fi
 
-mkdir $1/day$2
+mkdir $year/day$day
 
-cat << EOF > $1/day$2/day$2.py
+cat << EOF > $year/day$day/day$day.py
 #!/usr/bin/env python
 
 import fileinput
@@ -28,14 +44,14 @@ if __name__ == '__main__':
         print 'Executing function2 on line', (n + 1), 'returned', function2(line)
 EOF
 
-cat << EOF >> $1/day$2/tests.py
+cat << EOF >> $year/day$day/tests.py
 #!/usr/bin/env python
 
 import unittest
 
-from day$2 import function1, function2
+from day$day import function1, function2
 
-class TestDay$2(unittest.TestCase):
+class TestDay$day(unittest.TestCase):
     def test_part_one(self):
         self.assertEqual(function1('0'), 0)
 
@@ -46,5 +62,5 @@ if __name__ == '__main__':
     unittest.main()
 EOF
 
-chmod +x $1/day$2/day$2.py
-chmod +x $1/day$2/tests.py
+chmod +x $year/day$day/day$day.py
+chmod +x $year/day$day/tests.py
