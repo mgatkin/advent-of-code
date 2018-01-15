@@ -23,22 +23,33 @@ def add_ingredient(d, l):
             ] 
     d[name] = (capacity, durability, flavor, texture, calories)
 
-def cookie_score(ingredients, d):
+def cookie_score(ingredients, d, desired_calories = None):
     capacity = 0
     durability = 0
     flavor = 0
     texture = 0
+    calorie = 0
+    if desired_calories is not None:
+        calorie = desired_calories
     for n, ingredient in enumerate(ingredients):
         capacity = capacity + ingredient * d[d.keys()[n]][0]
         durability = durability + ingredient * d[d.keys()[n]][1]
         flavor = flavor + ingredient * d[d.keys()[n]][2]
         texture = texture + ingredient * d[d.keys()[n]][3]
+        calorie = calorie + ingredient * d[d.keys()[n]][4]
     if capacity > 0 and durability > 0 and flavor > 0 and texture > 0:
-        return capacity * durability * flavor * texture
+        if desired_calories is not None:
+            if calorie == desired_calories:
+                print calorie, 'cookie found'
+                return capacity * durability * flavor * texture
+            else:
+                return 0
+        else:
+            return capacity * durability * flavor * texture
     else:
         return 0
 
-def mix_ingredients(d):
+def mix_ingredients(d, desired_calories = None):
     cookie_scores = []
     for ingredient1 in xrange(101):
         if ingredient1 < 100:
@@ -46,20 +57,20 @@ def mix_ingredients(d):
                 if ingredient1 + ingredient2 < 100:
                     for ingredient3 in xrange(101 - ingredient2 - ingredient1):
                         if ingredient1 + ingredient2 + ingredient3 < 100:
-                            ingredient4 = 100 - ingredient3 - ingredient2 -ingredient1
-                            cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d))
+                            ingredient4 = 100 - ingredient3 - ingredient2 - ingredient1
+                            cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d, desired_calories))
                         else:
                             ingredient4 = 0
-                            cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d))
+                            cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d, desired_calories))
                 else:
                     ingredient3 = ingredient4 = 0
-                    cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d))
+                    cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d, desired_calories))
         else:
             ingredient2 = ingredient3 = ingredient4 = 0
-            cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d))
-    #print len(cookie_scores)
+            cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d, desired_calories))
     return max(cookie_scores)
 
 if __name__ == '__main__':
     ingredients = add_ingredients(fileinput.input())
     print 'Best cookie score:', mix_ingredients(ingredients)
+    print 'Best 500 calorie cookie score:', mix_ingredients(ingredients, 500)
