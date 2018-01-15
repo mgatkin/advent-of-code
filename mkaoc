@@ -15,19 +15,21 @@ if [[ $# -ne 2 || -z "$year" || -z "$day" ]]; then
     exit 0
 fi
 
-if [ ! -d $year ]; then
+AOC_DIR=~/advent-of-code
+
+if [ ! -d $AOC_DIR/$year ]; then
     echo Directory $year does not exist
     exit 1
 fi
 
-if [ -d $year/day$day ]; then
+if [ -d $AOC_DIR/$year/day$day ]; then
     echo Directory $year/day$day already exists
     exit 1
 fi
 
-mkdir $year/day$day
+mkdir $AOC_DIR/$year/day$day
 
-cat << EOF > $year/day$day/day$day.py
+cat << EOF > $AOC_DIR/$year/day$day/day$day.py
 #!/usr/bin/env python
 
 import fileinput
@@ -44,7 +46,7 @@ if __name__ == '__main__':
         print 'Executing function2 on line', (n + 1), 'returned', function2(line)
 EOF
 
-cat << EOF >> $year/day$day/tests.py
+cat << EOF >> $AOC_DIR/$year/day$day/tests.py
 #!/usr/bin/env python
 
 import unittest
