@@ -10,10 +10,11 @@ def add_reindeer(d, l):
     (name, speed, duration, rest) = [ l.split()[0], int(l.split()[3]), int(l.split()[6]), int(l.split()[13]) ] 
     d[name] = (speed, duration, rest)
 
-def timed_race(d, time):
+def race(d, time):
     distance_traveled = [ 0 for i in xrange(len(d)) ]
     time_traveling = [ 0 for i in xrange(len(d)) ]
     time_resting = [ 0 for i in xrange(len(d)) ]
+    score = [ 0 for i in xrange(len(d)) ]
     for t in xrange(time):
         for n, deer_info in enumerate(d):
             deer = data[deer_info]
@@ -26,11 +27,15 @@ def timed_race(d, time):
                 distance_traveled[n] = distance_traveled[n] + int(deer[0])
                 time_traveling[n] = 1
                 time_resting[n] = 0
-    print time, 'second race winner:', data.keys()[distance_traveled.index(max(distance_traveled))], max(distance_traveled), 'km'
+        for n, v in enumerate(distance_traveled):
+            if v == max(distance_traveled):
+                score[n] = score[n] + 1
+    print time, 'second race distance winner:', data.keys()[distance_traveled.index(max(distance_traveled))], max(distance_traveled), 'km'
+    print time, 'second race score winner:', data.keys()[score.index(max(score))], max(score), 'points'
 
 if __name__ == '__main__':
     data = {} 
     for n, line in enumerate(fileinput.input()):
         add_reindeer(data, line)
-    timed_race(data, 1000)
-    timed_race(data, 2503)
+    race(data, 1000)
+    race(data, 2503)
