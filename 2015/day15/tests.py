@@ -12,6 +12,7 @@ class TestDay15(unittest.TestCase):
                 ]
         ingredients = add_ingredients(data)
         self.assertEqual(cookie_score((44, 56), ingredients), 62842880)
+        self.assertEqual(cookie_score((40, 60), ingredients), 57600000)
 
 if __name__ == '__main__':
     unittest.main()

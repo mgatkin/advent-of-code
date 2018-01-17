@@ -29,8 +29,6 @@ def cookie_score(ingredients, d, desired_calories = None):
     flavor = 0
     texture = 0
     calorie = 0
-    if desired_calories is not None:
-        calorie = desired_calories
     for n, ingredient in enumerate(ingredients):
         capacity = capacity + ingredient * d[d.keys()[n]][0]
         durability = durability + ingredient * d[d.keys()[n]][1]
@@ -40,7 +38,6 @@ def cookie_score(ingredients, d, desired_calories = None):
     if capacity > 0 and durability > 0 and flavor > 0 and texture > 0:
         if desired_calories is not None:
             if calorie == desired_calories:
-                print calorie, 'cookie found'
                 return capacity * durability * flavor * texture
             else:
                 return 0
@@ -49,7 +46,7 @@ def cookie_score(ingredients, d, desired_calories = None):
     else:
         return 0
 
-def mix_ingredients(d, desired_calories = None):
+def mix_4_ingredients(d, desired_calories = None):
     cookie_scores = []
     for ingredient1 in xrange(101):
         if ingredient1 < 100:
@@ -70,7 +67,25 @@ def mix_ingredients(d, desired_calories = None):
             cookie_scores.append(cookie_score((ingredient1, ingredient2, ingredient3, ingredient4), d, desired_calories))
     return max(cookie_scores)
 
+def mix_all_ingredients(d, desired_calories = None):
+    cookie = []
+    cookie_scores = []
+    mix_ingredients(d, cookie, cookie_scores, desired_calories)
+    return max(cookie_scores)
+
+def mix_ingredients(d, cookie_ingredients, cookie_scores, desired_calories = None):
+    if len(cookie_ingredients) < len(d):
+        for amount in xrange(101):
+            mix_ingredients(d, cookie_ingredients + [ amount ], cookie_scores, desired_calories)
+    else:
+        if sum(cookie_ingredients) == 100:
+            cookie_scores.append(cookie_score(cookie_ingredients, d, desired_calories))
+
 if __name__ == '__main__':
     ingredients = add_ingredients(fileinput.input())
-    print 'Best cookie score:', mix_ingredients(ingredients)
-    print 'Best 500 calorie cookie score:', mix_ingredients(ingredients, 500)
+    if len(ingredients) == 4:
+        print 'Best cookie score:', mix_4_ingredients(ingredients)
+        print 'Best 500 calorie cookie score:', mix_4_ingredients(ingredients, 500)
+    else:
+        print 'Best cookie score:', mix_all_ingredients(ingredients)
+        print 'Best 500 calorie cookie score:', mix_all_ingredients(ingredients, 500)
