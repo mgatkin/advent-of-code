@@ -68,5 +68,5 @@ if __name__ == '__main__':
     unittest.main()
 EOF
 
-chmod +x $year/day$day/day$day.py
-chmod +x $year/day$day/tests.py
+chmod +x $AOC_DIR/$year/day$day/day$day.py
+chmod +x $AOC_DIR/$year/day$day/tests.py
