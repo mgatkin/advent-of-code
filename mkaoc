@@ -15,7 +15,11 @@ if [[ $# -ne 2 || -z "$year" || -z "$day" ]]; then
     exit 0
 fi
 
-AOC_DIR=~/advent-of-code
+if [ "$TERM_PROGRAM" == "Apple_Terminal" ]; then
+    AOC_DIR=~/Code/advent-of-code
+else
+    AOC_DIR=~/advent-of-code
+fi
 
 if [ ! -d $AOC_DIR/$year ]; then
     echo Directory $year does not exist
