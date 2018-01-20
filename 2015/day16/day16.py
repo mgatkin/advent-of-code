@@ -20,13 +20,12 @@ def find_aunt(d, calibrated = False):
         IsExcluded = False
         for attribute in d[aunt]:
             if attribute in AuntSue:
-                print attribute
                 if calibrated:
-                    if attribute is 'cats' or attribute is 'trees':
-                        if AuntSue[attribute] <= int(d[aunt][attribute]):
-                            IsExcluded = True
-                    elif attribute is 'pomeranians' or attribute is 'goldfish':
+                    if attribute == 'cats' or attribute == 'trees':
                         if AuntSue[attribute] >= int(d[aunt][attribute]):
+                            IsExcluded = True
+                    elif attribute == 'pomeranians' or attribute == 'goldfish':
+                        if AuntSue[attribute] <= int(d[aunt][attribute]):
                             IsExcluded = True
                     elif AuntSue[attribute] != int(d[aunt][attribute]):
                         IsExcluded = True
@@ -50,6 +49,6 @@ if __name__ == '__main__':
     data = {}
     for n, line in enumerate(fileinput.input()):
         add_aunt(data, line)
-    print 'Aunt', find_aunt(data)
-    print 'Aunt', find_aunt(data, calibrated = True)
+    print 'Aunt', find_aunt(data), 'gave you the gift'
+    print 'Accounting for calibration, Aunt', find_aunt(data, calibrated = True), 'gave you the gift'
 
