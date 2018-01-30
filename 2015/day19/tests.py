@@ -5,10 +5,11 @@ import unittest
 from day19 import build_tables, process_substitutions, process_molecules
 
 class TestDay19(unittest.TestCase):
-    i = [ 'H => HO\n', 'H => OH\n', 'O => HH\n', '\n', 'HOH\n', 'HOHOHO' ]
-    e = [ 'HOH', 'HOHOHO' ]
-    s = { 'H':[ 'HO', 'OH' ], 'O':[ 'HH' ] }
+    i = [ 'e => H\n', 'e => O\n', 'H => HO\n', 'H => OH\n', 'O => HH\n', '\n', 'e\n', 'HOH\n', 'HOHOHO' ]
+    e = [ 'e', 'HOH', 'HOHOHO' ]
+    s = { 'e':[ 'H', 'O' ], 'H':[ 'HO', 'OH' ], 'O':[ 'HH' ] }
     results = [
+            [ 'H', 'O' ],
             [ 'HOOH', 'HOHO', 'OHOH', 'HHHH' ],
             [ 'HOOHOHO', 'HOHOOHO', 'HOHOHOO', 'OHOHOHO', 'HHHHOHO', 'HOHHHHO', 'HOHOHHH' ]
             ]
