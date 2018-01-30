@@ -4,7 +4,7 @@ import re
 import argparse
 import fileinput
 
-def process_substitutions(e, s):
+def process_substitutions(e, s, verbose = 0):
     possible_combinations = []
     for item in s.iteritems():
         for n, sub in enumerate(item[1]):
