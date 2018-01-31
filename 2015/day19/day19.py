@@ -6,10 +6,13 @@ import fileinput
 
 def process_substitutions(e, s, verbose = 0):
     possible_combinations = []
+    number_of_substitutions = sum([ len(i) for i in s.itervalues() ])
+    count = 0
     for item in s.iteritems():
-        for n, sub in enumerate(item[1]):
-            if verbose > 0:
-                print 'Processing substitution', n + 1
+        for sub in item[1]:
+            count = count + 1
+            if verbose > 1:
+                print 'Processing substitution', count, 'of', number_of_substitutions
             for m in re.finditer(item[0], e):
                 i = m.start()
                 if verbose > 1:
@@ -33,8 +36,29 @@ def process_substitutions(e, s, verbose = 0):
 def process_molecules(m, s):
     c = []
     for n, e in enumerate(m):
-        p = process_substitutions(e, s)
+        if verbose > 1:
+            print 'Processing molecule', n + 1, 'of', len(m)
+        p = process_substitutions(e, s, verbose)
         c = c + [ p ]
+    return c
+
+def fabricate_molecules(m, s):
+    c = []
+    for n, e in enumerate(m):
+        i = [ 'e' ]
+        o = []
+        count = 0
+        while e not in o:
+            if verbose > 0:
+                print 'Processing', len(i), 'molecule(s)'
+            #print count, i,
+            o = flatten(process_molecules(i, s))
+            #print o
+            i = o
+            count = count + 1
+            if verbose > 1:
+                print count, 'iterations...'
+        c = c + [ count ]
     return c
 
 def build_tables(d):
@@ -49,6 +73,17 @@ def build_tables(d):
         elif len(a) == 1:
             molecules = molecules + a
     return data, molecules
+
+def flatten(l):
+    if verbose > 0:
+        print 'Flattening...'
+    r = []
+    for y in l:
+        r = r + [ x for x in y ]
+        #r = r + [ x for x in y if x not in r ]
+    if verbose > 0:
+        print 'Done.'
+    return r
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -67,4 +102,8 @@ if __name__ == '__main__':
     results = process_molecules(molecules, substitutions)
     for n, m in enumerate(results):
         print 'Processing molecule', n + 1, 'results in', len(m), 'distince molecules.'
+
+    results = fabricate_molecules(molecules, substitutions)
+    for n, m in enumerate(results):
+        print 'Molecule', n + 1, 'created in', m, 'steps.'
 
