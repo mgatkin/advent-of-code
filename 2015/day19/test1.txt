@@ -3,4 +3,3 @@ H => OH
 O => HH
 
 HOH
-HOHOHO
