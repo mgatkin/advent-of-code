@@ -4,14 +4,28 @@ import re
 import argparse
 import fileinput
 
+<<<<<<< HEAD
 def process_substitutions(e, s):
     if verbose > 0:
         print 'Processing molecule', e
+=======
+
+def process_substitutions(e, s, verbose=0):
+>>>>>>> feb51af085cb6909c8a67d070b017bff86e0652f
     possible_combinations = []
+    number_of_substitutions = sum([len(i) for i in s.itervalues()])
+    count = 0
     for item in s.iteritems():
+<<<<<<< HEAD
         for n, sub in enumerate(item[1]):
             if verbose > 0:
                 print 'Processing substitution', n + 1, '---', item[0], '=>', sub
+=======
+        for sub in item[1]:
+            count = count + 1
+            if verbose > 1:
+                print 'Processing substitution', count, 'of', number_of_substitutions
+>>>>>>> feb51af085cb6909c8a67d070b017bff86e0652f
             for m in re.finditer(item[0], e):
                 i = m.start()
                 if verbose > 1:
@@ -20,7 +34,7 @@ def process_substitutions(e, s):
                 if new_combination not in possible_combinations:
                     if verbose > 1:
                         print '(new molecule)'
-                    possible_combinations = possible_combinations + [ new_combination ]
+                    possible_combinations = possible_combinations + [new_combination]
                     if verbose > 2:
                         print new_combination
                     if verbose > 3:
@@ -32,14 +46,72 @@ def process_substitutions(e, s):
         print possible_combinations
     return possible_combinations
 
+
 def process_molecules(m, s):
     c = []
     for n, e in enumerate(m):
+<<<<<<< HEAD
         if verbose > 0:
             print 'Processing', e, 'in', m
         p = process_substitutions(e, s)
         c = c + [ p ]
+=======
+        if Verbose > 1:
+            print 'Processing molecule', n + 1, 'of', len(m)
+        subs = process_substitutions(e, s, Verbose)
+        c = c + [subs]
     return c
+
+
+def fabricate_molecules(m, s):
+    c = []
+    for n, e in enumerate(m):
+        i = ['e']
+        o = []
+        count = 0
+        while e not in o:
+            if Verbose > 0:
+                print 'Processing', len(i), 'molecule(s)'
+            o = flatten(process_molecules(i, s))
+            i = o
+            count = count + 1
+            if Verbose > 1:
+                print count, 'iterations...'
+        c = c + [count]
+    return c
+
+
+'''
+def fabricate_molecules(m, s, p):
+    c = []
+    for n, e in enumerate(m):
+        i = ['e']
+        o = []
+        count = 0
+        index = 0
+        while e not in o:
+            for possible_output in p:
+                sub_string_found = False
+                length = len(possible_output)
+                if len(o) < length:
+                    subs = process_substitutions(e, s, Verbose)
+                    for sub in subs:
+                        sub_length = len(sub)
+                        if len(o) < sub_length:
+                            continue
+                        if o[index:sub_length] is e[index:sub_length]:
+                            sub_string_found = True
+                            i = sub
+                else:
+                    if o[index:sub_length] is e[index:sub_length]:
+                        sub_string_found = True
+                if sub_string_found:
+                    break
+        c = c + [count]
+>>>>>>> feb51af085cb6909c8a67d070b017bff86e0652f
+    return c
+'''
+
 
 def fabricate_molecules(m, s):
     c = []
@@ -65,17 +137,33 @@ def fabricate_molecules(m, s):
     return c
 
 def build_tables(d):
-    data = {}
+    substitutions = {}
     molecules = []
+    possible_outputs = []
     for i in d:
         a = i.split()
         if len(a) == 3 and a[1] == '=>':
-            if a[0] not in data:
-                data[a[0]] = []
-            data[a[0]] = data[a[0]] + [ a[2] ]
+            if a[0] not in substitutions:
+                substitutions[a[0]] = []
+            substitutions[a[0]] = substitutions[a[0]] + [a[2]]
+            if a[2] not in possible_outputs:
+                possible_outputs = possible_outputs + [a[2]]
         elif len(a) == 1:
             molecules = molecules + a
-    return data, molecules
+    return substitutions, molecules, possible_outputs
+
+
+def flatten(l):
+    if Verbose > 0:
+        print 'Flattening...'
+    r = []
+    for y in l:
+        r = r + [x for x in y]
+    #    r = r + [ x for x in y if x not in r ]
+    if Verbose > 0:
+        print 'Done.'
+    return r
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -83,10 +171,11 @@ if __name__ == '__main__':
     parser.add_argument('files', metavar='FILE', nargs='*', help='files to read, if empty, stdin is used')
     args = parser.parse_args()
 
-    verbose = args.verbose
+    Verbose = args.verbose
 
-    data = []
+    Data = []
     for line in fileinput.input(files=args.files):
+<<<<<<< HEAD
         data = data + [ line.strip() ]
     substitutions, molecules = build_tables(data)
     if verbose > 2:
@@ -97,4 +186,17 @@ if __name__ == '__main__':
     results = fabricate_molecules(molecules, substitutions)
     #for n, m in enumerate(results):
     #    print 'Molecule', n + 1, 'fabricated in', m, 'steps.'
+=======
+        Data = Data + [line.strip()]
+    Substitutions, Molecules, PossibleOutputs = build_tables(Data)
+    if Verbose > 2:
+        print Substitutions, Molecules
+    results = process_molecules(Molecules, Substitutions)
+    for Number, Molecule in enumerate(results):
+        print 'Processing molecule', Number + 1, 'results in', len(Molecule), 'distinct molecules.'
+>>>>>>> feb51af085cb6909c8a67d070b017bff86e0652f
 
+#    results = fabricate_molecules(Molecules, Substitutions, PossibleOutputs)
+    results = fabricate_molecules(Molecules, Substitutions)
+    for Number, Molecule in enumerate(results):
+        print 'Molecule', Number + 1, 'created in', Molecule, 'steps.'
