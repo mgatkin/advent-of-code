@@ -17,18 +17,26 @@ def part1(data):
                 next_pos = find_next_position(current_pos, direction)
                 wires[w].append(next_pos)
                 current_pos = next_pos
+    w = 1
+    wire = wires[w]
     intersections = []
     print 'Finding intersections...'
-    length = len(wires[0][1:])
-    for i, w in enumerate(wires[0][1:]):
-        if i % 100 == 0:
-            print 'Checking', i, 'of', length
-        if w in wires[1][1:]:
-            intersections.append(w)
-    #for s in wires[0][1:]:
-    #    for d in wires[1][1:]:
-    #        if s == d:
-    #            intersections.append(s)
+    wire_length = len(wires[0][1:])
+    current_pos = wires[w][0]
+    position = 0
+    for wire_direction in wire_directions[w]:
+        direction = wire_direction[0]
+        length = int(wire_direction[1:])
+        for i in xrange(length):
+            next_pos = find_next_position(current_pos, direction)
+            wires[w].append(next_pos)
+            current_pos = next_pos
+            if position % 100 == 0:
+                print 'Checking', position, 'of', wire_length
+            if current_pos in wires[0][1:]:
+                intersections.append(current_pos)
+            position = position + 1
+    #print wires, intersections
     shortest_distance = maxint
     closest_point = None
     for i in intersections:
@@ -40,6 +48,95 @@ def part1(data):
         print closest_point, shortest_distance
     else:
         print 'No intersection detected.'
+    return wires, intersections
+
+
+def part1_first_algorithm(data):
+    wire_directions = [ data[0].split(','), data[1].split(',') ]
+    wires = [ [ (0, 0) ], [ (0, 0) ] ]
+    for w, wire in enumerate(wires):
+        print 'Tracing wire', w
+        current_pos = wires[w][len(wires[w]) - 1]
+        for wire_direction in wire_directions[w]:
+            direction = wire_direction[0]
+            length = int(wire_direction[1:])
+            for i in xrange(length):
+                next_pos = find_next_position(current_pos, direction)
+                wires[w].append(next_pos)
+                current_pos = next_pos
+    intersections = []
+    print 'Finding intersections...'
+    length = len(wires[0][1:])
+    for i, w in enumerate(wires[0][1:]):
+        if i % 100 == 0:
+            print 'Checking', i, 'of', length
+        if w in wires[1][1:]:
+            intersections.append(w)
+    shortest_distance = maxint
+    closest_point = None
+    for i in intersections:
+        distance = abs(i[0]) + abs(i[1])
+        if distance < shortest_distance:
+            closest_point = i
+            shortest_distance = distance
+    if closest_point is not None:
+        print closest_point, shortest_distance
+    else:
+        print 'No intersection detected.'
+    return wires, intersections
+
+
+def part1_second_algorithm(data):
+    wire_directions = [ data[0].split(','), data[1].split(',') ]
+    wires = [ [ (0, 0) ], [ (0, 0) ] ]
+    w = 0
+    wire = wires[w]
+    print 'Tracing wire', w
+    current_pos = wires[w][0]
+    for wire_direction in wire_directions[w]:
+        direction = wire_direction[0]
+        length = int(wire_direction[1:])
+        for i in xrange(length):
+            next_pos = find_next_position(current_pos, direction)
+            wires[w].append(next_pos)
+            current_pos = next_pos
+    w = 1
+    wire = wires[w]
+    intersections = []
+    print 'Tracing wire', w
+    current_pos = wires[w][0]
+    for wire_direction in wire_directions[w]:
+        direction = wire_direction[0]
+        length = int(wire_direction[1:])
+        for i in xrange(length):
+            next_pos = find_next_position(current_pos, direction)
+            wires[w].append(next_pos)
+            current_pos = next_pos
+            if current_pos in wires[0][1:]:
+                intersections.append(current_pos)
+    #print wires, intersections
+    shortest_distance = maxint
+    closest_point = None
+    for i in intersections:
+        distance = abs(i[0]) + abs(i[1])
+        if distance < shortest_distance:
+            closest_point = i
+            shortest_distance = distance
+    if closest_point is not None:
+        print closest_point, shortest_distance
+    else:
+        print 'No intersection detected.'
+    return wires, intersections
+
+
+def part2(wires, intersections):
+    #print 'wires =', wires
+    #print 'intersections =', intersections
+    min_delay = maxint
+    for i in intersections:
+        delay = wires[0].index(i) + wires[1].index(i)
+        min_delay = delay if delay < min_delay else min_delay
+    print min_delay
 
 
 def find_next_position(position, direction):
@@ -64,5 +161,8 @@ def add_tuple(a, b):
 if __name__ == '__main__':
     file_input = fileinput.input()
     lines = [ file_input.readline().strip(), file_input.readline().strip() ]
-    part1(lines)
+    #part1_first_algorithm(lines)
+    #part1_second_algorithm(lines)
+    wires, intersections = part1(lines)
+    part2(wires, intersections)
 
