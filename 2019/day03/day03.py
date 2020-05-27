@@ -2,6 +2,7 @@
 
 import fileinput
 from sys import maxint
+from time import time
 
 
 def part1(data):
@@ -158,11 +159,18 @@ def add_tuple(a, b):
         return (a[0] + b[0], a[1] + b[1])
 
 
+def processing_time(f, arg):
+    start_time = time()
+    result = f(arg)
+    print 'Processing', f.__name__, 'took', time() - start_time, 'seconds.'
+    return result
+
+
 if __name__ == '__main__':
     file_input = fileinput.input()
     lines = [ file_input.readline().strip(), file_input.readline().strip() ]
-    #part1_first_algorithm(lines)
-    #part1_second_algorithm(lines)
-    wires, intersections = part1(lines)
+    processing_time(part1_first_algorithm, lines)
+    processing_time(part1_second_algorithm, lines)
+    wires, intersections = processing_time(part1, lines)
     part2(wires, intersections)
 
