@@ -1,2 +1,7 @@
 .*.swp
 *.pyc
+/.metadata/
+venv
+.settings
+.cproject
+.project
