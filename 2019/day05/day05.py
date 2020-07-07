@@ -3,6 +3,9 @@
 import sys
 
 
+io_value = None
+
+
 def number_of_parameters_for_opcode(op):
     if op == 1 or op == 2:
         return 3
@@ -15,9 +18,9 @@ def number_of_parameters_for_opcode(op):
 
 
 def parse_command(data):
-    opcode = data[0] % 100
+    op_code = data[0] % 100
     parameters = []
-    length = number_of_parameters_for_opcode(opcode) + 1
+    length = number_of_parameters_for_opcode(op_code) + 1
     if length == 4:
         cmd = '%05d' % data[0]
         parameters.append((cmd[2], data[1]))
@@ -30,12 +33,15 @@ def parse_command(data):
         cmd = '%02d' % data[0]
     else:
         cmd = None
-    return opcode, parameters, length
+    return op_code, parameters, length
 
 
 def get_value(mode, value, buffer):
     if mode == '0':
-        return buffer[value]
+        if len(buffer) > value:
+            return buffer[value]
+        else:
+            return None
     elif mode == '1':
         return value
     else:
@@ -43,18 +49,35 @@ def get_value(mode, value, buffer):
 
 
 def execute_command(command, parameters, data_buffer):
+    global io_value
     if command == 1:
         value1 = get_value(parameters[0][0], parameters[0][1], data_buffer)
         value2 = get_value(parameters[1][0], parameters[1][1], data_buffer)
-        value3 = parameters[2][1]
-        data_buffer[value3] = value1 + value2
+        index = parameters[2][1]
+        if index is not None:
+            while len(data_buffer) < index:
+                data_buffer.append(None)
+            data_buffer[index] = value1 + value2
     elif command == 2:
         value1 = get_value(parameters[0][0], parameters[0][1], data_buffer)
         value2 = get_value(parameters[1][0], parameters[1][1], data_buffer)
-        value3 = parameters[2][1]
-        data_buffer[value3] = value1 * value2
-    else:
-        return None
+        index = parameters[2][1]
+        if index is not None:
+            while len(data_buffer) < index:
+                data_buffer.append(None)
+            data_buffer[index] = value1 * value2
+    elif command == 3:
+        index = parameters[0][1]
+        if index is not None:
+            while len(data_buffer) < index:
+                data_buffer.append(None)
+            data_buffer[index] = io_value
+    elif command == 4:
+        index = parameters[0][1]
+        if index is not None:
+            while len(data_buffer) < index:
+                data_buffer.append(None)
+            io_value = data_buffer[index]
 
 
 def parse_input(data):
@@ -62,8 +85,8 @@ def parse_input(data):
     index = 0
     buffer = data[:]
     while len(data) and cmd != 99:
-        cmd, parms, cmd_length = parse_command(data[:4])
-        execute_command(cmd, parms, buffer)
+        cmd, parameters, cmd_length = parse_command(data[:4])
+        execute_command(cmd, parameters, buffer)
         index = index + cmd_length
         data = buffer[index:]
     return buffer
@@ -74,8 +97,12 @@ if __name__ == '__main__':
         with open(sys.argv[1]) as f:
             raw_data = [int(s) for s in f.readline().split(',')]
 
+            if len(sys.argv) > 2:
+                io_value = int(sys.argv[2])
+
             # Part 1
-            print(parse_input(raw_data))
+            parse_input(raw_data)
+            print(io_value)
 
             # Part 2
             # Not yet implemented
