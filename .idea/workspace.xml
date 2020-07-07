@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="3" />
-  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -22,12 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caee13ba-1868-4ee0-81e4-07af19b9259d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/2019/day04/src/day04.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2019/day04/src/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b18f8c71-29d6-4cbd-89d8-240f6200237f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/mark_atkin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2019/day05/day02.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2019/day05/day05.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2019/day05/input.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2019/day05/input1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2019/day05/input2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2019/day05/input3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/advent-of-code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/advent-of-code.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,49 +37,36 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1dmgoLYif1tuS7xIZiM7TbuOyVS" />
+  <component name="ProjectId" id="1e8LoqFjwGjY7NJs4h3Iei3PH6w" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <console-settings module-name="advent-of-code" sdk-home="C:\advent-of-code\venv\Scripts\python.exe">
-        <option name="mySdkHome" value="C:\advent-of-code\venv\Scripts\python.exe" />
-        <option name="myModuleName" value="advent-of-code" />
-      </console-settings>
-    </option>
-  </component>
-  <component name="RunManager">
-    <configuration name="day04" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.day05">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="advent-of-code" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2019/day04/src" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="D:\advent-of-code\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2019/day04/src/day04.py" />
+      <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="input.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -86,22 +75,70 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="day02" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="advent-of-code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2019/day05" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2019/day05/day02.py" />
+      <option name="PARAMETERS" value="input2.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="day05" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="advent-of-code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2019/day05" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2019/day05/day05.py" />
+      <option name="PARAMETERS" value="input3.txt" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Unnamed" />
+      <item itemvalue="Python.day05" />
+      <item itemvalue="Python.day02" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.day04" />
+        <item itemvalue="Python.day05" />
+        <item itemvalue="Python.day02" />
       </list>
     </recent_temporary>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\mark.atkin\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="caee13ba-1868-4ee0-81e4-07af19b9259d" name="Default" comment="" />
-      <created>1517410525321</created>
+      <changelist id="b18f8c71-29d6-4cbd-89d8-240f6200237f" name="Default Changelist" comment="" />
+      <created>1593698450444</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1517410525321</updated>
+      <updated>1593698450444</updated>
     </task>
     <servers />
   </component>
@@ -118,49 +155,85 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="845" y="443" key="#Notifications" timestamp="1593039756986">
+    <state x="414" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593727902056">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2334" y="234" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@1920.0.1920.1160" timestamp="1593700716295" />
+    <state x="414" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593727902056" />
+    <state x="669" y="115" key="#day02" timestamp="1593727925792">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="669" y="115" key="#day02/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593727925792" />
+    <state x="669" y="157" key="#day05" timestamp="1593727944341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2589" y="175" key="#day05/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@1920.0.1920.1160" timestamp="1593700743867" />
+    <state x="669" y="157" key="#day05/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593727944341" />
+    <state x="739" y="321" key="FileChooserDialogImpl" timestamp="1593700076260">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="845" y="443" key="#Notifications/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593039756986" />
-    <state x="414" y="235" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593037736021">
+    <state x="739" y="321" key="FileChooserDialogImpl/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593700076260" />
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1593728621198">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="321" key="GridCell.Tab.0.bottom/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@1920.0.1920.1160" timestamp="1593701295962" />
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728621198" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1593728621198">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="321" key="GridCell.Tab.0.center/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@1920.0.1920.1160" timestamp="1593701295961" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728621198" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1593728621198">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="321" key="GridCell.Tab.0.left/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@1920.0.1920.1160" timestamp="1593701295961" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728621198" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1593728621198">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="321" key="GridCell.Tab.0.right/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@1920.0.1920.1160" timestamp="1593701295961" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728621198" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1593728247740">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728247740" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1593728247740">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728247740" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1593728247740">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728247740" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1593728247740">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593728247740" />
+    <state x="461" y="224" key="SettingsEditor" timestamp="1593700587781">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="414" y="235" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593037736021" />
-    <state x="669" y="175" key="#day04" timestamp="1593037361757">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state x="461" y="224" key="SettingsEditor/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593700587781" />
+    <state x="524" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1593724134631">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="669" y="175" key="#day04/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593037361757" />
-    <state x="92" y="92" width="1736" height="976" key="DiffContextDialog" timestamp="1593044101092">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="92" y="92" width="1736" height="976" key="DiffContextDialog/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593044101092" />
-    <state x="740" y="335" key="FileChooserDialogImpl" timestamp="1593037458443">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="740" y="335" key="FileChooserDialogImpl/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593037458443" />
-    <state width="949" height="321" key="GridCell.Tab.0.bottom" timestamp="1593043868465">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="949" height="321" key="GridCell.Tab.0.bottom/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593043868465" />
-    <state width="949" height="321" key="GridCell.Tab.0.center" timestamp="1593043868464">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="949" height="321" key="GridCell.Tab.0.center/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593043868464" />
-    <state width="949" height="321" key="GridCell.Tab.0.left" timestamp="1593043868464">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="949" height="321" key="GridCell.Tab.0.left/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593043868464" />
-    <state width="949" height="321" key="GridCell.Tab.0.right" timestamp="1593043868465">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state width="949" height="321" key="GridCell.Tab.0.right/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593043868465" />
-    <state x="825" y="282" key="RollbackChangesDialog" timestamp="1593044034274">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="825" y="282" key="RollbackChangesDialog/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593044034274" />
-    <state x="461" y="225" key="SettingsEditor" timestamp="1593038464185">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="461" y="225" key="SettingsEditor/-1366.430.1366.728/1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1593038464185" />
+    <state x="524" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1593724134631" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/2019/day05/day05.py</url>
+          <line>73</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
